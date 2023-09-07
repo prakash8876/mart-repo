@@ -3,8 +3,6 @@ package io.matoshri.customer.controller;
 import io.matoshri.customer.beans.CustomerDTO;
 import io.matoshri.customer.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -5,18 +5,14 @@ import io.matoshri.customer.beans.CustomerDTO;
 import io.matoshri.customer.exception.EmailExistsException;
 import io.matoshri.customer.exception.ResourceNotFoundException;
 import io.matoshri.customer.repo.CustomerRepository;
+import io.matoshri.customer.utils.Constants;
 import io.matoshri.customer.utils.CustomerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.matoshri.customer.utils.Constants;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
