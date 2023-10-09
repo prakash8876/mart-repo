@@ -1,5 +1,8 @@
 package io.matoshri.customer.service;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import io.matoshri.customer.beans.Customer;
 import io.matoshri.customer.beans.CustomerDTO;
 import io.matoshri.customer.exception.EmailExistsException;
@@ -12,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,5 +88,25 @@ class CustomerServiceImpl implements CustomerService {
 
     public long countCustomers() {
         return repo.count();
+    }
+
+    @Override
+    public void loadFromJson(String fileName) {
+        try {
+            String path = String.format("classpath:data/%s", fileName);
+            File file = new File(path);
+            if (!file.exists()) {
+                log.error("File path is not exists.");
+            }
+
+            List<CustomerDTO> customerDTOS = new Gson().fromJson(new JsonReader(new FileReader(file)), new TypeToken<List<CustomerDTO>>() {
+            }.getType());
+
+            log.info("Found {} records", customerDTOS.size());
+            long count = customerDTOS.stream().map(this::saveCustomer).count();
+            log.info("Saved {} from {}", count, customerDTOS.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

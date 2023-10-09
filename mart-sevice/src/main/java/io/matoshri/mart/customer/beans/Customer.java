@@ -1,12 +1,15 @@
 package io.matoshri.mart.customer.beans;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.mapping.model.AbstractPersistentProperty;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "customers")
+@DynamicUpdate
 public class Customer {
 
     @Id

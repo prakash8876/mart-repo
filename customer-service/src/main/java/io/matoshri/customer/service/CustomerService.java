@@ -17,4 +17,6 @@ public interface CustomerService {
     int deleteCustomerById(int customerId);
 
     long countCustomers();
+
+    void loadFromJson(String fileName);
 }
